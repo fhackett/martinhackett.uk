@@ -1,0 +1,41 @@
+name: Build and Deploy
+
+on:
+  # Runs on pushes targeting the default branch
+  push:
+    branches: ["main"]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# Allow one concurrent deployment
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
+
+env:
+  BUILD_PATH: "."
+
+jobs:
+  build:
+    name: Deploy
+    runs-on: ubuntu-latest
+    environment: cloudflare-pages
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup scala-cli
+        uses: VirtusLab/scala-cli-setup@main
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
+      - name: Scala build
+        run: scala-cli run . --main-class io.github.fhackett.build
+        working-directory: ${{ env.BUILD_PATH }}
+      - name: JS build
+        run: cd prebuild && bun run build
+        working-directory: ${{ env.BUILD_PATH }}
+      - name: Deploy
+        run: bunx wrangler pages deploy ${{ env.BUILD_PATH }}/prebuild/dist --project-name=martinhackett --branch=${{ github.ref_name }}
+        env:
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
