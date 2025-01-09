@@ -15,7 +15,6 @@ object index extends Target:
 
   def content: geny.Writable =
     wrapBody(
-      *.cls := "bg-[url(/martinhackett-main-bg.png)]",
       *.cls := "bg-fixed",
       *.cls := "bg-cover",
       *.cls := "flex",
@@ -28,6 +27,10 @@ object index extends Target:
         *.cls := "justify-center",
         *.cls := "content-center",
         div(
+          *.cls := "border-10",
+          *.cls := "border-gray-400",
+          *.cls := "border-solid",
+          *.cls := "p-6",
           h2(
             *.cls := "text-4xl",
             *.cls := "bg-white",
@@ -41,24 +44,16 @@ object index extends Target:
             *.cls := "space-y-2",
             *.cls := "justify-items-start",
             List(
-              ("Recordings", "/recordings"),
-              ("Paintings", "/paintings"),
-              ("Texts", "/texts"),
-              ("Live Performance", "/live"),
+              ("Sound", "/sound"),
+              ("Image", "/image"),
+              ("Text", "/text"),
+              ("Live", "/live"),
             )
-            .zip(armenianNumerals)
-            .map(_ :* _)
-            .map: (name, href, num) =>
+            .map: (name, href) =>
               a(
                 *.href := href,
                 *.cls := "bg-white",
                 *.cls := "ml-4",
-                span(
-                  *.cls := "inline-block",
-                  *.cls := "w-1em",
-                  *.cls := "pr-1",
-                  num, ". ",
-                ),
                 name,
               ),
           ),

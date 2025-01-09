@@ -33,8 +33,7 @@ object customtags:
   object a extends CustomTag:
     val tag = tags.a
     val styles = List(
-      *.cls := "underline",
-      *.cls := "hover:no-underline",
+      *.cls := "no-underline",
       *.cls := "color-black",
     )
 
