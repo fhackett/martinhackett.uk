@@ -13,15 +13,7 @@ object customtags:
   object noStyles extends Text.Modifier:
     def applyTo(t: Builder): Unit = ()
 
-  export Text.short.{
-    a as _,
-    p as _,
-    hr as _,
-    h2 as _,
-    h3 as _,
-    li as _,
-    *
-  }
+  export Text.short.{a as _, p as _, hr as _, h2 as _, h3 as _, li as _, *}
 
   trait CustomTag:
     def tag: Text.Tag
@@ -35,6 +27,7 @@ object customtags:
     val styles = List(
       *.cls := "no-underline",
       *.cls := "color-black",
+      *.cls := "hover:font-bold"
     )
 
   object p extends CustomTag:
@@ -95,12 +88,9 @@ def wrapBody(content: Modifier*): geny.Writable =
         *.cls := "min-h-screen",
         content,
         footer(
-          *.cls := "container",
-          *.cls := "mx-auto",
           *.cls := "text-center",
-          *.cls := "p-3",
+          *.cls := "pb-3",
           *.cls := "bg-white",
-          *.cls := "border-rd-md",
           span(
             "© ",
             LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy")),
@@ -115,7 +105,7 @@ def wrapHeader(content: Modifier*): geny.Writable =
     *.cls := "flex",
     *.cls := "flex-col",
     content,
-    tags.span(*.cls := "flex-grow"),
+    tags.span(*.cls := "flex-grow")
   )
 
 extension (ctx: StringContext)

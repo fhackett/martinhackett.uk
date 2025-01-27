@@ -1,8 +1,8 @@
-import UnoCSS from 'unocss/vite'
+import tailwindcss from '@tailwindcss/vite'
 
 export default {
   plugins: [
-    UnoCSS(),
+    tailwindcss(),
   ],
   build: {
     rollupOptions: {

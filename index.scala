@@ -8,15 +8,8 @@ import scalatags.Text
 object index extends Target:
   def path: os.SubPath = os.sub / "index.html"
 
-  // Armenian numerals 1-10, taken from https://en.wikipedia.org/wiki/Armenian_numerals
-  val armenianNumerals: List[String] = List(
-    "Ա", "Բ", "Գ", "Դ", "Ե", "Զ", "Է", "Ը", "Թ", "Ժ",
-  )
-
   def content: geny.Writable =
     wrapBody(
-      *.cls := "bg-fixed",
-      *.cls := "bg-cover",
       *.cls := "flex",
       *.cls := "flex-col",
       tags2.main(
@@ -35,7 +28,8 @@ object index extends Target:
             *.cls := "text-4xl",
             *.cls := "bg-white",
             *.cls := "font-bold",
-            "Martin Hackett",
+            *.cls := "pb-6",
+            "Martin Hackett"
           ),
           div(
             *.cls := "grid",
@@ -47,16 +41,16 @@ object index extends Target:
               ("Sound", "/sound"),
               ("Image", "/image"),
               ("Text", "/text"),
-              ("Live", "/live"),
+              ("Live", "/live")
             )
-            .map: (name, href) =>
-              a(
-                *.href := href,
-                *.cls := "bg-white",
-                *.cls := "ml-4",
-                name,
-              ),
-          ),
-        ),
-      ),
+              .map: (name, href) =>
+                a(
+                  *.href := href,
+                  *.cls := "bg-white",
+                  *.cls := "ml-4",
+                  name
+                )
+          )
+        )
+      )
     )

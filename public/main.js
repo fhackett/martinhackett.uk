@@ -1,6 +1,5 @@
 import './fonts.css'
-import '@unocss/reset/normalize.css'
-import 'uno.css'
+import './main.css'
 
 // (() => {
 //   const navbarOpen = document.getElementById("navbar-open")
