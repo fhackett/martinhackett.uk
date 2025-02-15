@@ -16,7 +16,8 @@ object dirs:
 def build(): Unit =
   val targets: List[Target] = List(
     index,
-    `404`
+    `404`,
+    live
   )
 
   val publicFiles =

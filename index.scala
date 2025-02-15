@@ -24,7 +24,7 @@ object index extends Target:
           *.cls := "border-gray-400",
           *.cls := "border-solid",
           *.cls := "p-6",
-          h2(
+          h1(
             *.cls := "text-4xl",
             *.cls := "bg-white",
             *.cls := "font-bold",
