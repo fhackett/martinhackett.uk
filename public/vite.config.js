@@ -9,6 +9,7 @@ export default {
       input: {
         index: 'index.html',
         404: '404.html',
+        live: 'live.html',
       },
     },
   },
