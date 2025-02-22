@@ -28,7 +28,27 @@ object live extends Target:
         Dominic Lash looks on.
       """,
       credits = "iPhone video by Kaddy Beck"
-    )
+    ),
+    Video(
+      title = "Company Night at Berkeley Arts Festival 1",
+      embedLink =
+        "https://www.youtube.com/embed/1VgMjUmL__c?si=2XAIxM4owojrUz4P",
+      description = frag"""
+        Konoko Nishi Smith, Tom Bickley, Tom Djll, Matt Ingalls, Clarke Robinson,
+         Martin Hackett at Berkeley Arts, Berkeley CA, September 20 2015
+      """,
+      credits = "iPhone video by Matt Hackett"
+    ),
+    Video(
+      title = "Company Night at Berkeley Arts Festival 2",
+      embedLink =
+        "https://www.youtube.com/embed/PLUkUtiT9N4?si=zsMzQVrWJGQn_ohN",
+      description = frag"""
+        Konoko Nishi Smith, Tom Bickley, Tom Djll, Matt Ingalls, Clarke Robinson,
+         Martin Hackett at Berkeley Arts, Berkeley CA, September 20 2015
+      """,
+      credits = "iPhone video by Matt Hackett"
+    ),
   )
 
   def content: geny.Writable =
