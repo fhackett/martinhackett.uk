@@ -29,7 +29,7 @@ object index extends Target:
             *.cls := "bg-white",
             *.cls := "font-bold",
             *.cls := "pb-6",
-            "Martin Hackett"
+            "Martin Hackett",
           ),
           div(
             *.cls := "grid",
@@ -41,16 +41,16 @@ object index extends Target:
               ("Sound", "/sound"),
               ("Image", "/image"),
               ("Text", "/text"),
-              ("Live", "/live")
+              ("Live", "/live"),
             )
               .map: (name, href) =>
                 a(
                   *.href := href,
                   *.cls := "bg-white",
                   *.cls := "ml-4",
-                  name
-                )
-          )
-        )
-      )
+                  name,
+                ),
+          ),
+        ),
+      ),
     )

@@ -27,7 +27,7 @@ object customtags:
     val styles = List(
       *.cls := "no-underline",
       *.cls := "color-black",
-      *.cls := "hover:font-bold"
+      *.cls := "hover:font-bold",
     )
 
   object p extends CustomTag:
@@ -45,7 +45,7 @@ object customtags:
     val styles =
       modifier(
         *.cls := "mt-0",
-        *.cls := "mb-2"
+        *.cls := "mb-2",
       )
 
   object li extends CustomTag:
@@ -56,7 +56,7 @@ object customtags:
     val tag = tags.hr
     val styles = List(
       *.cls := "border-solid-1",
-      *.cls := "border-gray-50"
+      *.cls := "border-gray-50",
     )
 
 import customtags.*
@@ -74,11 +74,11 @@ def wrapBody(content: Modifier*): geny.Writable =
         meta(*.charset := "utf-8"),
         meta(
           *.name := "viewport",
-          *.content := "width=device-width, initial-scale=1"
+          *.content := "width=device-width, initial-scale=1",
         ),
         link(*.rel := "icon", *.href := "/favicon.svg"),
         script(*.`type` := "module", *.src := "./main.js"),
-        tags2.title("Martin Hackett")
+        tags2.title("Martin Hackett"),
       ),
       body(
         *.cls := "font-[LexendDeca]",
@@ -94,10 +94,10 @@ def wrapBody(content: Modifier*): geny.Writable =
           span(
             "© ",
             LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy")),
-            " Martin Hackett, Finn Hackett"
-          )
-        )
-      )
+            " Martin Hackett, Finn Hackett",
+          ),
+        ),
+      ),
     )
 
 def wrapHeader(content: Modifier*): geny.Writable =
@@ -105,7 +105,7 @@ def wrapHeader(content: Modifier*): geny.Writable =
     *.cls := "flex",
     *.cls := "flex-col",
     content,
-    tags.span(*.cls := "flex-grow")
+    tags.span(*.cls := "flex-grow"),
   )
 
 extension (ctx: StringContext)
@@ -138,7 +138,7 @@ extension (ctx: StringContext)
                 .map: line =>
                   InitMarker.Line(line.stripLeading()) -> None)
               ++ Iterator.single(
-                InitMarker.Line(partLines.last.stripLeading()) -> modOpt
+                InitMarker.Line(partLines.last.stripLeading()) -> modOpt,
               )
       .foreach:
         case (InitMarker.Part(""), None) =>

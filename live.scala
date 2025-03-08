@@ -12,7 +12,7 @@ object live extends Target:
       title: String,
       embedLink: String,
       description: Modifier,
-      credits: String
+      credits: String,
   )
 
   val videos: List[Video] = List(
@@ -27,7 +27,7 @@ object live extends Target:
         This video shows Martin Hackett solo followed by MH in duo with Phil Durrant.
         Dominic Lash looks on.
       """,
-      credits = "iPhone video by Kaddy Beck"
+      credits = "iPhone video by Kaddy Beck",
     ),
     Video(
       title = "Mopomoso 11.12.2018",
@@ -46,7 +46,7 @@ object live extends Target:
         Konoko Nishi Smith, Tom Bickley, Tom Djll, Matt Ingalls, Clarke Robinson,
          Martin Hackett at Berkeley Arts, Berkeley CA, September 20 2015
       """,
-      credits = "iPhone video by Matt Hackett"
+      credits = "iPhone video by Matt Hackett",
     ),
     Video(
       title = "Company Night at Berkeley Arts Festival 2",
@@ -56,7 +56,7 @@ object live extends Target:
         Konoko Nishi Smith, Tom Bickley, Tom Djll, Matt Ingalls, Clarke Robinson,
          Martin Hackett at Berkeley Arts, Berkeley CA, September 20 2015
       """,
-      credits = "iPhone video by Matt Hackett"
+      credits = "iPhone video by Matt Hackett",
     ),
   )
 
@@ -75,7 +75,7 @@ object live extends Target:
           *.cls := "font-bold",
           *.cls := "text-center",
           *.cls := "pb-4",
-          "Martin Hackett: Live"
+          "Martin Hackett: Live",
         ),
         videos.map: video =>
           modifier(
@@ -94,7 +94,7 @@ object live extends Target:
                 *.cls := "font-semibold",
                 *.cls := "md:col-span-2",
                 *.cls := "lg:col-span-1",
-                video.title
+                video.title,
               ),
               iframe(
                 *.cls := "mx-auto",
@@ -105,20 +105,20 @@ object live extends Target:
                 *.title := "YouTube video player",
                 *.attr("frameborder") := 0,
                 *.attr(
-                  "allow"
+                  "allow",
                 ) := "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share",
                 *.attr("referrerpolicy") := "strict-origin-when-cross-origin",
-                *.attr("allowfullscreen").empty
+                *.attr("allowfullscreen").empty,
               ),
               div(
                 video.description,
                 p(
                   *.cls := "pt-2",
                   *.cls := "italic",
-                  video.credits
-                )
-              )
-            )
-          )
-      )
+                  video.credits,
+                ),
+              ),
+            ),
+          ),
+      ),
     )

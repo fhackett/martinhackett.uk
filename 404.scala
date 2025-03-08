@@ -17,9 +17,9 @@ object `404` extends Target:
         *.cls := "items-center",
         h2(
           *.cls := "mt-4",
-          "[Not Found]"
+          "[Not Found]",
         ),
         p(
-          "I'm not sure how you got here..."
-        )
+          "I'm not sure how you got here...",
+        ),
       )

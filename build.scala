@@ -17,7 +17,7 @@ def build(): Unit =
   val targets: List[Target] = List(
     index,
     `404`,
-    live
+    live,
   )
 
   val publicFiles =
@@ -59,7 +59,7 @@ def build(): Unit =
       os.copy.over(
         from = dirs.public / file,
         to = dirs.prebuild / file,
-        createFolders = true
+        createFolders = true,
       )
 
   os.proc("bun", "install").call(cwd = dirs.prebuild)
@@ -85,8 +85,8 @@ def dev(): Unit =
           println(s"  $path")
         println("rebuilding...")
         build()
-        waitingMsg()
-    )
+        waitingMsg(),
+    ),
   ): _ =>
     // have a seat and let the other threads work
     Thread.currentThread().join()
