@@ -18,6 +18,9 @@ def build(): Unit =
     index,
     `404`,
     live,
+    under_construction(os.sub / "sound", name = "Sound"),
+    under_construction(os.sub / "image", name = "Image"),
+    under_construction(os.sub / "text", name = "Text"),
   )
 
   val publicFiles =

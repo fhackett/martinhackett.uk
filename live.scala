@@ -36,7 +36,7 @@ object live extends Target:
       description = frag"""
         Martin Hackett, Korg MS10; Tom Jackson, clarinet. Recorded at Mopomoso, 11.12.2018, the Vortex. (excerpt)
       """,
-      credits = ""
+      credits = "",
     ),
     Video(
       title = "Company Night at Berkeley Arts Festival 1",
