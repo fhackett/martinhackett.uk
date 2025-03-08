@@ -30,6 +30,15 @@ object live extends Target:
       credits = "iPhone video by Kaddy Beck"
     ),
     Video(
+      title = "Mopomoso 11.12.2018",
+      embedLink =
+        "https://www.youtube.com/embed/fn3TqIhbUBM?si=8mWVwhBElNPkOOkE",
+      description = frag"""
+        Martin Hackett, Korg MS10; Tom Jackson, clarinet. Recorded at Mopomoso, 11.12.2018, the Vortex. (excerpt)
+      """,
+      credits = ""
+    ),
+    Video(
       title = "Company Night at Berkeley Arts Festival 1",
       embedLink =
         "https://www.youtube.com/embed/1VgMjUmL__c?si=2XAIxM4owojrUz4P",
