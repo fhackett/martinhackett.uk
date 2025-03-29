@@ -38,9 +38,9 @@ object index extends Target:
             *.cls := "space-y-2",
             *.cls := "justify-items-start",
             List(
-              ("Sound", "/sound"),
-              ("Image", "/image"),
-              ("Text", "/text"),
+              ("Sound", "https://soundcloud.com/user-240745194"), // "/sound"
+              // ("Image", "/image"),
+              // ("Text", "/text"),
               ("Live", "/live"),
             )
               .map: (name, href) =>
