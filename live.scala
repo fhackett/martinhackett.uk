@@ -39,6 +39,16 @@ object live extends Target:
       credits = "",
     ),
     Video(
+      title = "Mopomoso 15.01.2017",
+      embedLink =
+        "https://www.youtube.com/embed/mRXDTR1thNU?si=CCWvBFsx6GOy7CwR",
+      description = frag"""
+        Martin Hackett, Korg MS10; Daniel Thompson, guitar, Philipp Wachsmann, violin.
+        Recorded at Mopomoso, 15.01.2017, the Vortex. 
+      """,
+      credits = "",
+    ),
+    Video(
       title = "Company Night at Berkeley Arts Festival 1",
       embedLink =
         "https://www.youtube.com/embed/1VgMjUmL__c?si=2XAIxM4owojrUz4P",
