@@ -1,4 +1,4 @@
-package uk.martinhackett
+package site
 
 import customtags.*
 import scalatags.Text.tags

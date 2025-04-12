@@ -1,4 +1,4 @@
-package uk.martinhackett
+package site
 
 trait Renderable:
   def render: scalatags.Text.Modifier

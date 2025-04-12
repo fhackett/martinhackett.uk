@@ -1,0 +1,18 @@
+{
+	"name": "martinhackett.uk",
+	"build": {
+		"dockerfile": "Dockerfile"
+	},
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"scalameta.metals",
+				"github.vscode-github-actions",
+				"scala-lang.scala",
+				"ms-azuretools.vscode-docker",
+				"GitHub.vscode-pull-request-github"
+			]
+		}
+	},
+	"postCreateCommand": "scala-cli clean ."
+}
