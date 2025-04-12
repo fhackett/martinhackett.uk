@@ -29,7 +29,7 @@ jobs:
       - name: Setup Bun
         uses: oven-sh/setup-bun@v2
       - name: Scala build
-        run: scala-cli run . --main-class uk.martinhackett.build
+        run: scala-cli run . --main-class site.build
         working-directory: ${{ env.BUILD_PATH }}
       - name: JS build
         run: cd prebuild && bun run build

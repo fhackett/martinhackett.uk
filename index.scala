@@ -38,7 +38,8 @@ object index extends Target:
             *.cls := "space-y-2",
             *.cls := "justify-items-start",
             List(
-              ("Sound", "https://soundcloud.com/user-240745194"), // "/sound"
+              ("SoundCloud", "https://soundcloud.com/user-240745194"),
+              ("BandCamp", "/bandcamp_releases"),
               // ("Image", "/image"),
               // ("Text", "/text"),
               ("Live", "/live"),

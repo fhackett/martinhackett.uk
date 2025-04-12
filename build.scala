@@ -25,6 +25,7 @@ def build(): Unit =
     index,
     `404`,
     live,
+    bandcamp_releases,
     under_construction(os.sub / "sound.html", name = "Sound"),
     under_construction(os.sub / "image.html", name = "Image"),
     under_construction(os.sub / "text.html", name = "Text"),
