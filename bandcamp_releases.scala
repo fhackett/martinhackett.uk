@@ -31,6 +31,11 @@ object bandcamp_releases extends Target:
       img = "/gfx/ha th wa.png",
       href = "https://emptybirdcagerecords.bandcamp.com/album/ha-th-wa",
     ),
+    BandcampRelease(
+      name = "Duos by Martin Hackett, Gordon Pym",
+      img = "/gfx/Duos Hackett Pym.jpg",
+      href = "https://okazo.bandcamp.com/album/duos",
+    ),
   )
 
   def content: geny.Writable =
