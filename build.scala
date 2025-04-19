@@ -3,24 +3,22 @@
 //> using dep com.lihaoyi::os-lib:0.11.4
 //> using dep com.lihaoyi::os-lib-watch:0.11.4
 //> using dep com.lihaoyi::scalatags:0.13.1
+//> using javaOpt -Dsite.buildtool=npm
 package site
 
 import scala.util.Using
 import java.io.Closeable
 import scala.collection.mutable
 import scala.annotation.tailrec
+import scala.util.control.NonFatal
 
 object dirs:
   val public = os.pwd / "public"
   val prebuild = os.pwd / "prebuild"
 
-lazy val buildToolExe =
-  System.getProperty("site.buildtool") match
-    case null => "bun"
-    case str  => str
-
 @main
 def build(): Unit =
+  val shouldInstall = System.getenv("SITE_SHOULD_INSTALL") != "no"
   val targets: List[Target] = List(
     index,
     `404`,
@@ -73,11 +71,35 @@ def build(): Unit =
         createFolders = true,
       )
 
-  os.proc(buildToolExe, "install").call(cwd = dirs.prebuild)
+  if shouldInstall
+  then os.proc(buildToolExe, "install").call(
+    cwd = dirs.prebuild,
+    stdin = os.Inherit,
+    stdout = os.Inherit,
+    stderr = os.Inherit,
+  )
 
   targets.foreach: target =>
     println(s"regenerating ${dirs.prebuild / target.path}")
     os.write.over(dirs.prebuild / target.path, target.content)
+
+lazy val buildToolExe =
+  try
+    os.proc("bun", "--version")
+      .call(stdin = os.Pipe, stdout = os.Pipe, stderr = os.Pipe)
+    // if this went ok, assume bun works
+    "bun"
+  catch case NonFatal(_) => "npm"
+
+private def doNpmInstall(): Unit =
+  println(s"$buildToolExe install")
+  os.proc(buildToolExe, "install")
+    .call(
+      cwd = dirs.prebuild,
+      stdin = os.Inherit,
+      stdout = os.Inherit,
+      stderr = os.Inherit,
+    )
 
 @main
 def dev(): Unit =
@@ -88,49 +110,81 @@ def dev(): Unit =
 
     def witnessChanges(changes: Set[os.Path]): Unit =
       synchronized:
-        this.changes ++= changes
-        println(s"saw changes:")
-        changes.foreach: path =>
-          println(s"  $path")
-        lastDebounce = System.currentTimeMillis()
-        println("debounced rebuild in >=500ms...")
+        if changes.nonEmpty
+        then
+          this.changes ++= changes
+          println(s"saw changes:")
+          changes.foreach: path =>
+            println(s"  $path")
+          lastDebounce = System.currentTimeMillis()
+          println("debounced rebuild in >=500ms...")
 
     @tailrec
     def eventLoop(printMsg: Boolean): Unit =
       val printMsgRec =
         synchronized:
           if printMsg
-          then println(s"watching for changes in ${dirs.public}, Ctrl^C to end")
+          then
+            println(
+              s"watching for changes in ${os.pwd} (but not ${os.pwd / "prebuild"}), Ctrl^C to end",
+            )
           wait(500)
           if changes.nonEmpty && System
               .currentTimeMillis() - lastDebounce >= 500
           then
             changes.clear()
             println("rebuilding now.")
-            build()
-            npmDevProc match
-              case None =>
-                npmDevProc = Some:
-                  os.proc(
-                    buildToolExe,
-                    "run",
-                    "dev",
-                    "--",
-                    "--host",
-                  ).spawn(
-                    cwd = os.pwd / "prebuild",
-                    destroyOnExit = true,
-                    stdout = os.Inherit,
-                    stderr = os.Inherit,
-                  )
-              case Some(_) => // already running, leave it alone
+            val buildResult = os
+              .proc(
+                "scala-cli",
+                "run",
+                ".",
+                "--main-class",
+                "site.build",
+                "--",
+                "false",
+              )
+              .call(
+                cwd = os.pwd,
+                stdin = os.Inherit,
+                stdout = os.Inherit,
+                stderr = os.Inherit,
+                check = false,
+                env = Map(
+                  "SITE_SHOULD_INSTALL" -> "no",
+                ),
+              )
+            if buildResult.exitCode != 0
+            then println(s"build failed with code ${buildResult.exitCode}")
+            else
+              npmDevProc match
+                case None =>
+                  doNpmInstall()
+                  println("launching vite")
+                  npmDevProc = Some:
+                    os.proc(
+                      buildToolExe,
+                      "run",
+                      "dev",
+                      "--",
+                      "--host",
+                    ).spawn(
+                      cwd = os.pwd / "prebuild",
+                      destroyOnExit = true,
+                      stdout = os.Inherit,
+                      stderr = os.Inherit,
+                    )
+                case Some(_) => // already running, leave it alone
             true
           else false
       eventLoop(printMsg = printMsgRec)
 
   Using.resource(
     os.watch.watch(
-      Seq(dirs.public),
+      Seq(
+        dirs.public,
+        os.pwd / "site",
+      ),
       state.witnessChanges,
     ),
   ): _ =>
