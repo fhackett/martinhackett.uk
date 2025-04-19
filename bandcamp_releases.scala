@@ -36,6 +36,11 @@ object bandcamp_releases extends Target:
       img = "/gfx/Duos Hackett Pym.jpg",
       href = "https://okazo.bandcamp.com/album/duos",
     ),
+    BandcampRelease(
+      name = "Live at Iklectik",
+      img = "/gfx/Live at Iklectik.jpg",
+      href = "https://scatterarchive.bandcamp.com/album/live-at-iklectik",
+    ),
   )
 
   def content: geny.Writable =
